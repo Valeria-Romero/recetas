@@ -39,9 +39,18 @@ const borrarReceta = (req, res) =>{
         })
 }
 
+const actualizarReceta = (req, res) => {
+    Recetas.findByIdAndUpdate({_id: req.params.id}, req.body, {new:true, runValidators:true})
+        .then(receta => res.json(receta))
+        .catch(err => {
+            res.status(400).json(err);
+        })
+}
+
 module.exports = {
     guardarReceta,
     buscarRecetas,
     buscarReceta,
-    borrarReceta
+    borrarReceta,
+    actualizarReceta
 }
